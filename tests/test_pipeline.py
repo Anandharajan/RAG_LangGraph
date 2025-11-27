@@ -1,48 +1,39 @@
-import sys
 import os
+import sys
 from pathlib import Path
+
+import pytest
 
 # Add project root to sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from src.ingestion import load_pdf, chunk_documents
-from src.vectorstore import create_vectorstore, load_vectorstore
 from src.config import PDF_PATH
+from src.ingestion import chunk_documents, load_pdf
+from src.vectorstore import create_vectorstore, load_vectorstore
 
-def test_ingestion():
-    print("Testing Ingestion...")
+
+@pytest.fixture(scope="module")
+def chunks():
+    """Load and chunk the PDF if it exists, otherwise skip the tests."""
+
     if not os.path.exists(PDF_PATH):
-        print(f"Skipping ingestion test: {PDF_PATH} not found.")
-        return
-    
+        pytest.skip(f"Skipping ingestion test: {PDF_PATH} not found.")
+
     docs = load_pdf(str(PDF_PATH))
-    assert len(docs) > 0, "No documents loaded"
-    print(f"Loaded {len(docs)} pages.")
-    
+    assert docs, "No documents loaded"
+
     chunks = chunk_documents(docs)
-    assert len(chunks) > 0, "No chunks created"
-    print(f"Created {len(chunks)} chunks.")
+    assert chunks, "No chunks created"
     return chunks
 
-def test_vectorstore(chunks):
-    print("Testing Vector Store...")
-    if not chunks:
-        print("Skipping vector store test: No chunks.")
-        return
 
+def test_ingestion(chunks):
+    assert len(chunks) > 0
+
+
+def test_vectorstore(chunks):
     vs = create_vectorstore(chunks)
     assert vs is not None, "Vector store creation failed"
-    print("Vector store created and saved.")
-    
+
     loaded_vs = load_vectorstore()
     assert loaded_vs is not None, "Vector store loading failed"
-    print("Vector store loaded successfully.")
-
-if __name__ == "__main__":
-    try:
-        chunks = test_ingestion()
-        test_vectorstore(chunks)
-        print("All tests passed!")
-    except Exception as e:
-        print(f"Test failed: {e}")
-        sys.exit(1)
