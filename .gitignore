@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+
+# Local artifacts
+data/source.pdf
+data/faiss_index/
+
+# Gradio upload temp files (just in case)
+tmp/
