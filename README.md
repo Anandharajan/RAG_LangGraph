@@ -1,3 +1,15 @@
+---
+title: RAG LangGraph Chatbot
+emoji: 🤖
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: 4.44.1
+app_file: app.py
+python_version: 3.11
+pinned: false
+---
+
 # RAG-Based Chatbot (LangGraph + Hugging Face)
 
 This project implements a RAG (Retrieval-Augmented Generation) chatbot that answers with either:
@@ -51,10 +63,23 @@ rag_agent_project/
     - Start chatting!
 
 ## Deployment (Hugging Face Spaces)
-1.  Create a new Space on Hugging Face (SDK: Gradio).
-2.  Upload the contents of `rag_agent_project` to the Space.
-3.  Ensure `requirements.txt` is present.
-4.  The app will build and launch automatically.
+1.  **Create your Space** (Gradio SDK):
+    ```bash
+    huggingface-cli login  # or set HUGGINGFACEHUB_API_TOKEN in your env
+    huggingface-cli repo create <username>/<space-name> --type space --sdk gradio
+    ```
+
+2.  **Push this repo to the Space** (includes metadata above for SDK + app entrypoint):
+    ```bash
+    git remote add space https://huggingface.co/spaces/<username>/<space-name>
+    git push space HEAD:main
+    ```
+    The Space will install dependencies from `requirements.txt` and start `app.py` automatically.
+
+3.  **(Optional) Configure secrets/variables in the Space**
+    - `HUGGINGFACEHUB_API_TOKEN`: token for router-based generation.
+    - `HF_MODEL_ID`: override the router model (default: `meta-llama/Meta-Llama-3-8B-Instruct`).
+    - `LOCAL_MODEL_ID`: change the local fallback model (default: `distilgpt2`).
 
 ### GitHub Actions auto-deploy
 - The repository includes a workflow at `.github/workflows/deploy-space.yml` that syncs the repo to your Hugging Face Space.

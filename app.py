@@ -177,4 +177,8 @@ with gr.Blocks(title="RAG Chatbot (LangGraph + HF)") as demo:
 
 if __name__ == "__main__":
     # Use local launch by default; share links can fail without network access.
-    demo.queue().launch(share=False)
+    demo.queue().launch(
+        share=False,
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("PORT", 7860)),
+    )
