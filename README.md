@@ -83,3 +83,4 @@ rag_agent_project/
 - If you want to pin a different router model, set `HF_MODEL_ID` in the Space variables. Override `LOCAL_MODEL_ID` if you want a specific offline fallback.
 - The `data/` folder is persisted for uploads and FAISS index; it is git-ignored here but created at runtime.
 - Entry point is `app.py`; `demo.queue().launch()` is enabled for Spaces concurrency.
+- Current status: build verified on HF Space `Anandharajan/RAG_LangGraph` with Python 3.10 (via `space.yaml`/`runtime.txt`).
