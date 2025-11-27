@@ -9,3 +9,7 @@ data/faiss_index/
 
 # Gradio upload temp files (just in case)
 tmp/
+
+# Local tooling
+.DS_Store
+/.github/.DS_Store
