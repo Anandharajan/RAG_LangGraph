@@ -56,6 +56,13 @@ rag_agent_project/
 3.  Ensure `requirements.txt` is present.
 4.  The app will build and launch automatically.
 
+### GitHub Actions auto-deploy
+- The repository includes a workflow at `.github/workflows/deploy-space.yml` that syncs the repo to your Hugging Face Space.
+- Configure two repository secrets in GitHub:
+  - `HF_TOKEN`: a Hugging Face access token with write access to the target Space.
+  - `HF_SPACE_ID`: the full Space identifier (e.g., `username/space-name`).
+- The workflow runs on pushes to `main`, `master`, or `work`, on tags matching `v*`, or via the **Run workflow** button in GitHub.
+
 ## Technical Details
 - **LLM**: HF router (with token, default `meta-llama/Meta-Llama-3-8B-Instruct`) or local transformers fallback (`LOCAL_MODEL_ID`, default `distilgpt2`; change to a stronger model if running locally).
 - **Embeddings**: sentence-transformers/all-MiniLM-L6-v2
