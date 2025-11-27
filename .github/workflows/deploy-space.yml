@@ -2,7 +2,10 @@ name: Deploy to Hugging Face Space
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - main
+      - master
+      - work
     tags: [ 'v*' ]
   workflow_dispatch:
 
