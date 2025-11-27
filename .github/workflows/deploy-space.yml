@@ -1,0 +1,19 @@
+name: Deploy to Hugging Face Space
+
+on:
+  push:
+    branches: [ master ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+jobs:
+  sync-space:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Push to Hugging Face Space
+        uses: huggingface/hub-action@v1
+        with:
+          repo-token: ${{ secrets.HF_TOKEN }}
+          repo-id: ${{ secrets.HF_SPACE_ID }}
+          repo-type: space
