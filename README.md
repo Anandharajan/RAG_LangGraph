@@ -11,7 +11,7 @@ title: RAG LangGraph Chatbot
 sdk: gradio
 sdk_version: 4.44.1
 app_file: app.py
-python_version: 3.10
+python_version: "3.10"
 ---
 
 # RAG-Based Chatbot (LangGraph + Hugging Face)
