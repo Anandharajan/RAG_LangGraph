@@ -16,7 +16,7 @@ python_version: "3.10"
 
 # RAG-Based Chatbot (LangGraph + Hugging Face)
 
-[![Deploy to Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/deploy-to-spaces-lg.svg)](https://huggingface.co/new-space?template=Anandharajan/RAG_LangGraph&sdk=gradio)
+[![Deploy to Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/deploy-to-spaces-lg.svg)](https://anandharajan-rag-langgraph.hf.space)
 
 This project implements a RAG (Retrieval-Augmented Generation) chatbot that answers with either:
 - **Hugging Face router** (when you provide an HF token and a router-available model; default `HF_MODEL_ID`: `meta-llama/Meta-Llama-3-8B-Instruct`), or
@@ -73,7 +73,7 @@ rag_agent_project/
 2.  Upload the contents of `rag_agent_project` to the Space.
 3.  Ensure `requirements.txt` is present.
 4.  The app will build and launch automatically.
-5.  Or click the “Deploy to Spaces” button above for a one-touch setup that clones this template Space (`Anandharajan/RAG_LangGraph`) and preselects the Gradio SDK.
+5.  Or click the “Deploy to Spaces” button above for a one-touch setup via `https://anandharajan-rag-langgraph.hf.space`, which clones this template Space (`Anandharajan/RAG_LangGraph`) and preselects the Gradio SDK.
 
 ## Technical Details
 - **LLM**: HF router (with token, default `meta-llama/Meta-Llama-3-8B-Instruct`) or local transformers fallback (`LOCAL_MODEL_ID`, default `distilgpt2`; change to a stronger model if running locally).
